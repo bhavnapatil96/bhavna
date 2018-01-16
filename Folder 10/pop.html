@@ -1,0 +1,20 @@
+<html>
+<body>
+<input type="button" id="btnOpen" value="Popup">
+<input type="button" id="btnClose" value="Close">
+
+<script>
+    var wn;
+    document.getElementById("btnOpen").onclick=function () {
+        var url="pop.html";
+        var opt="top,100,left=500,width=400,height=400";
+        wn=window.open(url,"_blank",opt);
+    }
+    document.getElementById("btnClose").onclick=function () {
+       wn.close();
+    }
+
+
+</script>
+</body>
+</html>

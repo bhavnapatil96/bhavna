@@ -1,0 +1,48 @@
+<html>
+<body>
+<div id="msg"></div>
+<input type="text" id="txt">
+<input type="button" onclick="sGame()" value="Guess">
+<script>
+    window.onload=sWord;
+    var arr=["Javascript","Css","html","head","java","PHP"];
+    var msg=document.getElementById("msg");
+    var random;
+    var w;
+    function sWord() {
+
+        w=arr[Math.floor(Math.random()*arr.length)];
+        random=w;
+        w=w.toLowerCase();
+        console.log(w);
+        var l=w.length;
+        var str="";
+            for(var i=0;i<l;i++)
+            {   var j=Math.floor(Math.random()*w.length);
+                console.log(j);
+                str+=w[j];
+              //  console.log(w[j]);
+                w=w.substr(0,j)+w.substr(j+1);
+              //  console.log(w + "    "+str);
+              //  w.splice(w,1);
+            }
+
+
+            console.log(str);
+            msg.innerHTML="Plase guess this word :) "+str;
+    }
+    function sGame() {
+        var txt=document.getElementById("txt").value;
+        if(random==txt.toLowerCase())
+        {
+            alert("Correct");
+        }
+        else
+        {
+            alert("Wrong");
+        }
+    }
+
+</script>
+</body>
+</html>

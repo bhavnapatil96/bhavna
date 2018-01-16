@@ -1,0 +1,44 @@
+<html>
+<head>
+    <style>
+    .output
+    {
+        height:50px;
+
+    }
+    </style>
+</head>
+<body onload="start()">
+
+<div class="output">Bhavna</div>
+<div class="output">Pooja</div>
+<div class="output">Geet</div>
+<div class="output">Rahul</div>
+<div class="output">Ranu</div>
+<div class="output">Krishna</div>
+<div class="output">Mona</div>
+<div class="output">Krunal</div>
+
+<script>
+    var el=document.querySelectorAll(".output");
+    var c;
+    var bgcolor=["red","green","yellow","blue","gray","aqua","pink","maroon"];
+    function  start() {
+        setInterval(swapbg, 2000);
+    }
+
+        function  swapbg() {
+
+            for(var i=0;i<el.length;i++)
+            {
+                 c=bgcolor[Math.floor(Math.random()*el.length)];
+                    el[i].style.backgroundColor=c;
+            }
+        }
+            
+
+</script>
+</body>
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<html>
+<head>
+    <style>
+
+        #holder{
+            display: inline-block;
+            height: 300px;
+            width: 300px;
+            border:2px solid black;
+            padding: 10px;
+        }
+        .active{
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+
+<div id="holder">
+
+    <div id="output"></div>
+</div>
+<script>
+
+    var el=document.getElementById("holder");
+    el.addEventListener("mouseover",function(){
+        console.log("Over");
+        this.classList.add('active');
+    });
+    el.addEventListener("mouseout",function(){
+        console.log("Out");
+
+        this.classList.remove('active');
+        document.getElementById("output").innerHTML="";
+    });
+    el.addEventListener("mousemove",function(){
+        console.log("Click");
+        var html="X ="+event.clientX+" | Y = "+event.clientY;
+       // this.classList.remove('active');
+        document.getElementById("output").innerHTML=html;
+    });
+</script>
+</body>
+</html>

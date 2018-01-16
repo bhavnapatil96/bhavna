@@ -1,0 +1,41 @@
+<html>
+<body>
+
+<form>
+    <textarea cols="100" rows="4" id="textdata"></textarea>
+<textarea cols="100" rows="4" id="outdata"></textarea>
+<input type="button" value="Get Emails" onclick="fun()">
+</form>
+<script>
+
+    var out=document.getElementById("outdata");
+
+    function fun() {
+
+        var text=document.getElementById("textdata").value;
+
+
+        var re=new RegExp("([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)","gi");
+    var hol=[];
+        var res=text.match(re);
+        console.log(res);
+        if(res)
+        {
+           for(var i=0;i<res.length;i++){
+               if(hol.indexOf(res[i])==-1)
+               {
+                   hol.push(res[i]);
+               }
+           }
+
+            out.innerHTML=hol;
+        }
+        else
+        {
+            alert("No Email Found...");
+        }
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,255 @@
+<html>
+<head>
+    <style>
+        .display{
+            display:block;
+        }
+        .hide{
+            display: none;
+        }
+        td{
+            font-size: larger;
+            width: 15%;
+        }
+        #myexp td{
+            text-align: center;
+            font-family: "Comic Sans MS";
+
+        }
+        #myexp1 th{
+            text-align: center;
+            font-family: "Comic Sans MS";
+            font-size: large;
+        }
+        button{
+            padding: 10px;
+            font-size: small;
+            width: 100px;
+            color: white;
+            background-color: darkblue;
+            box-shadow: 1px 1px 10px black;
+            border-radius: 10px;
+        }
+        button:hover{
+            font-size: large;
+            color: red;
+        }
+        button:active{
+            color: aqua;
+            font-size: xx-large;
+            box-shadow: 2px 2px 20px red;
+        }
+        input[type="checkbox" ]{
+            padding: 10px;
+        }
+        .exp{
+            background-color: red;
+            color: white;
+        }
+
+
+    </style>
+</head>
+
+<div align="center">
+    <table id="mytable" style="width: 100%">
+        <tr align="center">
+            <td colspan="6">Expense Name :-<input type="text" id="exp"> </td>
+        </tr>
+        <tr>
+            <td>Person Involve</td>
+            <td>A <input type="checkbox" id="11" onchange="addmemeber('A',this)" class="in"></td>
+            <td>B <input type="checkbox" id="12"  onchange="addmemeber('B',this)" class="in"></td>
+            <td>C <input type="checkbox" id="13"  onchange="addmemeber('C',this)" class="in"></td>
+            <td>D <input type="checkbox" id="14"  onchange="addmemeber('D',this)" class="in"></td>
+            <td>E <input type="checkbox" id="15"  onchange="addmemeber('E',this)" class="in"></td>
+
+        </tr>
+        <tr>
+            <td>Expense Given By</td>
+            <td>A <input type="checkbox" id="21" onchange="check(this,31,'A')" class="ex"></td>
+            <td>B <input type="checkbox" id="22" onchange="check(this,32,'B')" class="ex"></td>
+            <td>C <input type="checkbox" id="23" onchange="check(this,33,'C')" class="ex"></td>
+            <td>D <input type="checkbox" id="24" onchange="check(this,34,'D')" class="ex"></td>
+            <td>E <input type="checkbox" id="25" onchange="check(this,35,'E')" class="ex"></td>
+
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="number" id="31" class="hide hd"></td>
+            <td><input type="number" id="32" class="hide hd"></td>
+            <td><input type="number" id="33" class="hide hd"></td>
+            <td><input type="number" id="34" class="hide hd"></td>
+            <td><input type="number" id="35" class="hide hd"></td>
+
+        </tr>
+        <tr>
+            <td colspan="6" align="center"><button onclick="add()">Add</button> </td>
+        </tr>
+    </table>
+
+    <table id="myexp1">
+        <tr>
+            <th>Member</th>
+            <th>Given</th>
+            <th>Expense</th>
+            <th>Status</th>
+        </tr>
+
+    </table>
+    <table id="myexp">
+
+
+    </table>
+</div>
+<script>
+    var tripname,memarr=[],givexp=[],givexpval=[],memeach=[];
+    function load() {
+        memeach.push({"mem":"A","give":0,"exp":0});
+        memeach.push({"mem":"B","give":0,"exp":0});
+        memeach.push({"mem":"C","give":0,"exp":0});
+        memeach.push({"mem":"D","give":0,"exp":0});
+        memeach.push({"mem":"E","give":0,"exp":0});
+    }
+    load();
+    function check(val,id,mem) {
+        if(val.checked){
+
+            givexp.push(mem);
+            document.getElementById(id).setAttribute("class","display hd");
+        }
+        else{
+            document.getElementById(id).setAttribute("class","hide hd");
+        }
+    }
+    function add() {
+
+        var totamt=0;
+        var exp=document.getElementById("exp").value;
+        console.log(memarr);
+        givexp.forEach(function (t) {
+            switch (t){
+                case 'A':givexpval.push({"mem":"A","val":document.getElementById('31').value});
+                    totamt+=parseInt(document.getElementById('31').value);
+                    memeach[0].give= memeach[0].give+parseInt(document.getElementById('31').value);
+                    document.getElementById('31').value="";
+                    break;
+                case 'B':givexpval.push({"mem":"B","val":document.getElementById('32').value});
+                    totamt+=parseInt(document.getElementById('32').value);
+                    memeach[1].give= memeach[1].give+parseInt(document.getElementById('32').value);
+                    document.getElementById('32').value="";
+                    break;
+                case 'C':givexpval.push({"mem":"C","val":document.getElementById('33').value});
+                    totamt+=parseInt(document.getElementById('33').value);
+                    memeach[2].give= memeach[2].give+parseInt(document.getElementById('33').value);
+                    document.getElementById('33').value="";
+                    break;
+                case 'D':givexpval.push({"mem":"D","val":document.getElementById('34').value});
+                    totamt+=parseInt(document.getElementById('34').value);
+                    memeach[3].give= memeach[3].give+parseInt(document.getElementById('34').value);
+                    document.getElementById('34').value="";
+                    break;
+                case 'E':givexpval.push({"mem":"E","val":document.getElementById('35').value});
+                    totamt+=parseInt(document.getElementById('35').value);
+                    memeach[4].give= memeach[4].give+parseInt(document.getElementById('35').value);
+                    document.getElementById('35').value="";
+                    break;
+            }
+        });
+        var eachamt=totamt/memarr.length;
+        console.log(eachamt);
+        memarr.forEach(function (t) {
+            switch (t){
+                case 'A':
+                    memeach[0].exp+=eachamt;
+                    break;
+                case 'B':
+                    memeach[1].exp+=eachamt;
+                    break;
+                case 'C':
+                    memeach[2].exp+=eachamt;
+                    break;
+                case 'D':
+                    memeach[3].exp+=eachamt;
+                    break;
+                case 'E':
+                    memeach[4].exp+=eachamt;
+                    break;
+            }
+        });
+        var q1=document.querySelectorAll(".in");
+        q1.forEach(function (t) {
+            t.checked=false;
+        });
+        var q2=document.querySelectorAll(".ex");
+        q2.forEach(function (t) {
+            t.checked=false;
+        });
+        var q3=document.querySelectorAll(".hd");
+        q3.forEach(function (t) {
+            t.setAttribute("class","hide hd");
+            console.log(t);
+        });
+        console.log(memeach);
+        memarr=[];
+        givexpval=[];
+        givexp=[];
+
+        final();
+    }
+    function final() {
+
+        var take=[];
+        var table=document.getElementById("myexp");
+        table.innerText="";
+        for (var ii in memeach){
+            take.push({"mem":memeach[ii].mem,"give":memeach[ii].give,"exp":memeach[ii].exp,"amt":memeach[ii].exp-memeach[ii].give});
+        }
+        for (var ii in take){
+            debugger;
+            var  tr=table.insertRow(-1);
+            var cel1=tr.insertCell(0);
+            var cel2=tr.insertCell(1);
+            var cel3=tr.insertCell(2);
+            var cel4=tr.insertCell(3);
+            cel1.innerText=take[ii].mem;
+            cel2.innerText=take[ii].give;
+            if(take[ii].give>take[ii].exp){
+                var takeamt=take[ii].give-take[ii].exp;
+                var query='';
+
+                for (var iii in take) {
+                    if(takeamt>1 ) {
+                        if (take[iii].give < take[iii].exp ) {
+
+                            if(takeamt>take[iii].amt ) {
+                                var a=take[iii].amt;
+                                query += take[iii].mem + "=" + take[iii].amt+',';
+                                take[iii].amt=0;
+                                takeamt=takeamt- a;
+
+                            }
+                            else{
+                                query += take[iii].mem + "=" + takeamt;
+                                take[iii].amt=(take[iii].amt-takeamt);
+                                takeamt=0;
+                            }
+                        }
+                    }
+                }
+                cel4.setAttribute("class","exp");
+                cel4.innerText=query;
+            }
+            cel3.innerText=memeach[ii].exp;
+
+            table.appendChild(tr);
+        }
+
+    }
+    function addmemeber(mem,val) {
+        if(val.checked) {
+            memarr.push(mem);
+        }
+    }
+</script>
+</html>

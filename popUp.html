@@ -1,0 +1,19 @@
+<html>
+<body onload="hide()">
+
+<input type="button" id="btn" value="Pop Up">
+
+<div id="myModal" style="height:200px;width:200px;border:2px solid black;background-color:aqua"><h2>Hi Bhavna</h2><br><h3>You open a Modal using Javascript</h3></div>
+
+<script>
+    function hide()
+    {
+        document.getElementById("myModal").style.visibility="hidden";
+    }
+    document.getElementById("btn").onclick=function(){
+        var e1=document.getElementById("myModal");
+        e1.style.visibility=(e1.style.visibility=="visible")?"hidden":"visible";
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<html>
+<head>
+    <style>
+        #output{
+            height: 400px;
+            width: 400px;
+            border:2px solid black;
+            display: block;
+        }
+        #cButtons >div{
+            height: 100px;
+            width: 100px;
+            display: inline-block;
+            border:2px solid black;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div><h1>Color Game</h1></div>
+<div id="msg"><h1></h1></div>
+
+<input type="button" id="btnstart" onclick="start()" value="Start">
+<div id="output"></div>
+<div id="cButtons"></div>
+<div id="guess"></div>
+
+<script>
+    var col=["red","green","blue","yellow"];
+    var arr1=[];
+    var arr2=[];
+    var myT;
+    var loop=0;
+
+    var out=document.getElementById("output");
+    var msg=document.getElementById("msg");
+
+
+    function  start()
+    {
+        var html="";
+        for(var i=0;i<col.length;i++)
+        {
+            html+='<div onclick="oGuess()" class="'+col[i]+'" style="background-color:'+col[i]+'">'+col[i]+'</div>';
+
+        }
+        document.getElementById("cButtons").innerHTML=html;
+
+        for(var i=0;i<4;i++)
+        {
+            var ranIndex=Math.floor(Math.random()*col.length);
+            arr1.push(col[ranIndex]);
+
+        }
+        myT=setTimeout(goWhite,1000);
+    }
+
+    function goWhite() {
+        out.style.backgroundColor="white";
+        myT=setTimeout(goColor,1000);
+
+    }
+    function goColor()
+    {
+        out.style.backgroundColor=arr1[loop];
+        loop++;
+        if(loop>arr1.length)
+        {
+            clearTimeout(myT);
+        }
+        myT=setTimeout(goWhite,1000);
+    }
+    function oGuess() {
+        var g=event.target.className;
+        arr2.push(g);
+        if (arr2.length == arr1.length) {
+            if (arr1.toString() == arr2.toString()) {
+                msg.innerText = "you were correct :)";
+            }
+            else {
+                msg.innerHTML = "you were wrong <br> Your guess " + arr2 + "<br>correct order was " + arr1;
+            }
+        }
+    }
+</script>
+</body>
+</html>

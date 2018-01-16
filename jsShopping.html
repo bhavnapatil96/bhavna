@@ -1,0 +1,29 @@
+<html>
+<body>
+
+<div>Javascript Shopping List.....</div>
+<div>
+    <input type="text" id="txtitem">
+    <input type="button" value="Add" id="btnAdd">
+</div>
+<div id="out">
+    <ol id="sList">
+
+    </ol>
+</div>
+<script>
+
+    document.getElementById("btnAdd").onclick=function () {
+        addOne();
+    }
+    function addOne()
+    {
+        var item=document.getElementById("txtitem").value;
+        var li=document.createElement('li');
+        li.appendChild(document.createTextNode(item));
+        console.log(li);
+        document.getElementById("sList").appendChild(li);
+    }
+</script>
+</body>
+</html>

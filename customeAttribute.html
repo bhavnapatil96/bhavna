@@ -1,0 +1,99 @@
+<html>
+<head>
+<style>
+    td{
+        border:2px solid #08adff;
+    }
+</style>
+</head>
+<body>
+
+<div id="demo">Javascript Custom Attribute...</div>
+
+<div id="row">Row data</div>
+
+<div id="input">
+    <input type="text" id="txt"><input type="button" id="add" value="Add New Friend">
+</div>
+
+<div id="output">Table Here</div>
+
+<script>
+    var el=document.getElementById("demo");
+    el.setAttribute("style","color:red;font-size:1.9em");
+    var html='';
+
+
+    window.onload=build;
+
+    var arr=["Bhavna","Geet","Ranu","Rahul","Krunal"];
+
+    var add=document.getElementById("add");
+
+    add.onclick=function () {
+        var txt=document.getElementById("txt").value;
+
+        var tr=document.createElement('tr');
+        tr.setAttribute("data-vote",0);
+        tr.setAttribute("data-row",arr.length+1);
+       tr.innerHTML='<td class="box">'+(arr.length+1)+'</td><td>'+txt+'</td><td>'+0+'</td>';
+       /* var td=document.createElement('td');
+
+        tr.appendChild(td);
+        td.appendChild(document.createTextNode(arr.length+1));
+
+        td=document.createElement('td');
+        tr.appendChild(td);
+        td.appendChild(document.createTextNode(txt));
+
+        td=document.createElement('td');
+        tr.appendChild(td);
+        td.appendChild(document.createTextNode('0'));*/
+
+
+
+        var con=document.querySelector("#output table tbody");
+        con.appendChild(tr);
+        arr.push(txt);
+        voteCount();
+
+    }
+
+    function build()
+    {
+        html='<h1>My Friends List.....</h1>';
+        html+='<table border="1">';
+        for(var i=0;i<arr.length;i++)
+        {
+            html+='<tr data-row="'+i+'" data-vote="'+0+'"><td class="box" >'+(i+1)+'</td><td>'+arr[i]+'</td><td>'+0+'</td></tr>';
+        }
+        html+='</table>';
+
+        document.getElementById("output").innerHTML=html;
+        var a,v;
+        voteCount();
+
+    }
+    function voteCount()
+    {
+        var elbox=document.querySelectorAll("#output .box");
+        for(var i=0;i<elbox.length;i++)
+        {
+            elbox[i].onclick=function(){
+
+                // console.log(this.parentElement.getAttribute('data-row'));
+                a=this.closest('[data-row]').getAttribute('data-row');
+                console.log(arr[a]);
+                document.getElementById("row").innerHTML=arr[a]+"  at row  " + (a);
+                v=this.closest('[data-vote]').getAttribute('data-vote');
+                v++;
+                this.parentElement.setAttribute("data-vote",v);
+                this.parentElement.lastElementChild.innerText=v;
+
+            }
+        }
+    }
+
+</script>
+</body>
+</html>

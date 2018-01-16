@@ -1,0 +1,34 @@
+<html>
+<body>
+<script>
+
+    var txt="";
+    var col="";
+    var size="";
+    function imgGen()
+    {
+        txt=document.getElementById("txtdata").value;
+         var color=document.getElementById("txtcolor").value;
+         col=color.replace("#","");
+        size=document.getElementById("selSize").value;
+        var tmt=document.getElementById("myimg");
+        tmt.src="http://via.placeholder.com/"+size+"/"+col+"/fff?text="+txt+"";
+    }
+
+</script>
+
+<select id="selSize" onchange="imgGen()">
+
+    <option value="750x150">Large</option>
+    <option value="350x150">Medium</option>
+    <option value="150x150">Small</option>
+
+
+</select>
+
+<input type="text" id="txtdata" onkeypress="imgGen()">
+<input type="color" id="txtcolor" onchange="imgGen()">
+
+<img src="http://via.placeholder.com/350x150/ff0000/fff?text=Image2" id="myimg">
+</body>
+</html>

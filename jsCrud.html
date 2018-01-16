@@ -1,0 +1,81 @@
+<html>
+<body>
+
+<div id="head">
+    Javascript.......
+</div>
+
+<div id="form">
+
+    <input type="text" id="txt">
+    <input type="button" id="btnAdd" value="Add">
+    <br>
+</div>
+
+<div id="output">Output</div>
+<script>
+    var out=document.getElementById("output");
+    var arr=["Bhavna","Geet"];
+
+    window.onload=build;
+
+    document.getElementById("btnAdd").onclick=function () {
+        arr.push(document.getElementById("txt").value);
+        html="";
+        build();
+    }
+    function build()
+    {
+        var html="";
+
+        html+='<table border="1"><tr><td>'+"Name"+'</td><td>'+"Action 1"+'</td><td>'+"Action 2"+'</td></tr>';
+        for(var i=0;i<arr.length;i++)
+        {
+            html+='<tr data-row="'+i+'"><td>'+arr[i]+'</td><td><a href="#" data-action="delete">'+"Delete"+'</a></td><td><a href="#" data-action="edit">'+"Edit"+'</a></td></tr>';
+        }
+        html+='</table>';
+
+        out.innerHTML=html;
+
+        var dAc=document.querySelectorAll('[data-action="delete"]');
+        for(var x=0;x<dAc.length;x++)
+        {
+            dAc[x].addEventListener('click',function () {
+                event.preventDefault();
+                var ival=this.closest('[data-row]').getAttribute("data-row");
+                console.log(ival);
+                arr.splice(ival,1);
+                build();
+            })
+        }
+
+
+        var eAc=document.querySelectorAll('[data-action="edit"]');
+        for(var x=0;x<dAc.length;x++)
+        {
+            eAc[x].addEventListener('click',function () {
+                event.preventDefault();
+                var row=this.closest('[data-row]');
+                var rid=row.getAttribute("data-row");
+
+                row.style.backgroundColor="yellow";
+
+                var td=row.firstElementChild;
+                var input=document.createElement('input');
+                input.type="text";
+                input.value=td.innerText;
+                td.innerHTML="";
+                td.appendChild(input);
+                input.focus();
+                input.onblur=function () {
+                    td.innerHTML=input.value;
+                    row.style.backgroundColor="white";
+                }
+
+               // build();
+            })
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Freind's Amount</title>
+</head>
+<body>
+
+
+
+<div id="main">
+    <form>
+        <table border="1" align="center" style="height: 400px;width: 400px" >
+            <tr>
+                <td>Expense Name</td>
+                <td><input type="text" id="txtE"></td>
+            </tr>
+
+            <tr>
+                <td>Involved Person</td>
+                <td>
+                    <input type="checkbox" id="chk1" name="chk1" value="A">A
+                    <input type="checkbox" id="chk2" name="chk1" value="B">B
+                    <input type="checkbox" id="chk3" name="chk1" value="C">C
+                    <input type="checkbox" id="chk4" name="chk1" value="D">D
+                    <input type="checkbox" id="chk5" name="chk1" value="E">E
+
+
+                </td>
+            </tr>
+            <tr>
+                <td>Payble Person</td>
+                <td>
+                    <select id="sel1">
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                        <option value="E">E</option>
+
+                    </select>
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>Payble Amount</td>
+                <td><input type="text" id="txtA"></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="button" value="Add Expense" onclick="addExpense()">
+                    <input type="button" value="Final" onclick="final()">
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<div id="out"></div>
+<div id="out1"></div>
+
+<div id="realdiv"></div>
+<script>
+
+        var arr1=["ex","involved","pp","amt"];
+        var arr2=[];
+        var IP=[];
+        var html=document.getElementById("out");
+        var html1=document.getElementById("out1");
+        var html2=document.getElementById("realdiv");
+        var f=["A","B","C","D","E"];
+        var amount=[0,0,0,0,0];
+        var exp=[0,0,0,0,0];
+        // Add Expense of Friends..........................
+        function addExpense() {
+
+            var e=document.getElementById("txtE").value;
+            var pa,pp;
+            var ip="";
+            var c=document.getElementsByName("chk1");
+            for(var k=0;k<5;k++)
+            {
+                if(c[k].checked)
+                {
+                    ip+=c[k].value+"|";
+                }
+
+            }
+
+            pp=document.getElementById("sel1").value;
+            pa=document.getElementById("txtA").value;
+
+            console.log(e);
+            console.log(ip);
+            console.log(pp);
+            console.log(pa);
+
+
+
+            arr2.push(e);
+            arr2.push(ip);
+            arr2.push(pp);
+            arr2.push(pa);
+            IP=arr2[1].split("|");
+
+            console.log(arr2);
+            
+            
+            calc(pp,pa);
+
+            document.getElementById("txtE").value="";
+            for(var k=0;k<5;k++)
+            {
+                c[k].checked="";
+
+            }
+            document.getElementById("sel1").value="";
+            document.getElementById("txtA").value="";
+
+
+
+
+        }
+        // Count the payable Amount....................
+        function calc(ppp,paa) {
+
+
+            var totalPerson=IP.length-1;
+            var divideAmt=paa/totalPerson;
+            var out="";
+            var out1="";
+            out+="Total person " + totalPerson+"<br><br>";
+            out+=ppp + " is Paid total "+paa+" Ruppes"+"<br><br>";
+
+            console.log("Total person " + totalPerson);
+            console.log(ppp + " is Paid total "+paa+" Ruppes");
+
+            var i=f.indexOf(ppp);
+            amount[i]=Number(amount[i])+ Number(paa);
+            //amount[i]=Number(amount[i])- Number(exp[i]);
+
+            console.log("amount = "+ amount[i]);
+            //exp[i]=0;
+
+            for(var j=0;j<IP.length-1;j++) {
+                if (ppp != IP[j]) {
+                    console.log(IP[j] + " will give total " + divideAmt + " Rupees");
+                    out += IP[j] + " will give total " + divideAmt + " Rupees" + "<br><br>";
+
+
+                    //amount[i] = 0;
+
+
+                }
+                var i = f.indexOf(IP[j]);
+                console.log(i);
+
+                exp[i] = Number(exp[i]) + Number(divideAmt);
+                html.innerHTML = out;
+                console.log(divideAmt);
+
+
+
+                //console.log(out1);
+            }
+
+
+
+
+
+        }
+        function final()
+        {
+
+            var out1="";
+
+            out1 += "<h1>Expense Manager.....</h1>";
+            out1+="Friend | Balance | Expense<br><br><hr>";
+            for (var y = 0; y < f.length; y++) {
+                out1 += f[y] + "\t\t\t\t" + amount[y] + "\t\t\t\t" + exp[y] + "<br><br>";
+
+            }
+            html1.innerHTML = out1;
+        }
+        var real=[];
+        function final()
+        {
+
+            var out1="";
+
+            out1 += "<h1>Expense Manager.....</h1>";
+            out1+="Friend | Total Give | Expense<br><br><hr>";
+            for (var y = 0; y < f.length; y++) {
+                out1 += f[y] + "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + amount[y] + "\t\t\t\t" + exp[y] + "<br><br>";
+
+            }
+            html1.innerHTML = out1;
+
+
+            //....................Real Detail.........................
+
+            for(var i=0;i<amount.length;i++)
+            {
+                real[i]=Number(amount[i])-Number(exp[i]);
+            }
+
+
+            var out2="";
+            for(var i=0;i<amount.length;i++)
+            {
+                real[i]=Number(amount[i])-Number(exp[i]);
+            }
+
+            out2 += "<h1>Person AMount.....</h1>";
+            out2+="Friend | Balance <br><br><hr>";
+            for (var y = 0; y < f.length; y++) {
+                out2 += f[y] + "\t\t\t\t" + real[y] + "<br><br>";
+
+            }
+            html2.innerHTML = out2;
+        }
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+String 1<input type="text" id="str1">
+String 2<input type="text" id="str2">
+<input type="button" id="btn" value="Save" onclick="sum()">
+
+<div id="msg">Messsage</div>
+<script>
+
+
+    var arr=["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+    var po=[];
+    for(var i=0;i<arr.length;i++)
+    {
+        po[i]=Math.pow(2,i);
+    }
+
+    function sum() {
+
+        var str1=document.getElementById("str1").value;
+        var str2=document.getElementById("str2").value;
+
+        //var posstr1=[];
+        //var posstr2=[];
+
+        var l1=str1.length;
+        var sum1=0,sum2=0;
+        for(var j=0;j<l1;j++)
+        {
+            var pos=arr.indexOf(str1[j]);
+            //posstr1.push(pos);
+             sum1=sum1+Math.pow(2,pos);
+
+        }
+
+
+        var l2=str2.length;
+        for(var j=0;j<l2;j++)
+        {
+            var pos=arr.indexOf(str2[j]);
+            //posstr2.push(pos);
+            sum2=sum2+Math.pow(2,pos);
+        }
+        var sub=sum1-sum2;
+        var str="";
+            var c=po.length;
+            chk(c);
+
+          function chk(c) {
+            for (var i = 0; i < c; i++) {
+                if (sub >= Number(po[i])) {
+                    c = i;
+
+                }
+            }
+            sub -= Number(po[c]);
+            str += arr[c];
+            console.log(sub);
+            console.log(str);
+
+            if (sub > 0) {
+                chk(c);
+            }
+        }
+    }
+
+
+</script>
+
+</body>
+
+</html>

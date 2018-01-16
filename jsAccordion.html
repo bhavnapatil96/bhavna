@@ -1,0 +1,57 @@
+<html>
+<head>
+    <style>
+        .acc{
+            background-color:#ddd;
+            font-size:1.5em;
+        }
+        .con {
+            border: 1px solid black;
+            padding: 20px;
+            font-size: 0.8em;
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div class="acc">Chap 1</div>
+<div class="con">Content 1</div>
+
+<div class="acc">Chap 2</div>
+<div class="con">Content 2</div>
+
+<div class="acc">Chap 3</div>
+<div class="con">Content 3</div>
+
+<div class="acc">Chap 4</div>
+<div class="con">Content 4</div>
+
+<div class="acc">Chap 5</div>
+<div class="con">Content 5</div>
+
+<script>
+
+    var aTitle=document.querySelectorAll(".acc");
+    var c=document.querySelectorAll(".con");
+
+    for(var i=0;i<aTitle.length;i++)
+    {
+        aTitle[i].onclick=function () {
+            cons();
+            this.nextElementSibling.classList.toggle('active');
+
+        }
+    }
+    function cons()
+    {
+        for(var i=0;i<c.length;i++)
+        {
+                c[i].classList.remove('active');
+        }
+    }
+</script>
+</body>
+</html>

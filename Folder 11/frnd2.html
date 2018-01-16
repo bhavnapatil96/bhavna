@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Freind's Amount</title>
+</head>
+<body>
+
+
+
+<div id="main">
+    <form>
+        <table border="1" align="center" style="height: 400px;width: 400px" >
+            <tr>
+                <td>Expense Name</td>
+                <td><input type="text" id="txtE"></td>
+            </tr>
+
+            <tr>
+                <td>Involved Person</td>
+                <td>
+                    <input type="checkbox" id="chk1" name="chk1" value="A">A
+                    <input type="checkbox" id="chk2" name="chk1" value="B">B
+                    <input type="checkbox" id="chk3" name="chk1" value="C">C
+                    <input type="checkbox" id="chk4" name="chk1" value="D">D
+                    <input type="checkbox" id="chk5" name="chk1" value="E">E
+
+
+                </td>
+            </tr>
+            <tr>
+                <td>Payble Person</td>
+                <td>
+                    <input type="checkbox" id="chk01" name="chk2" onclick="myfun(document.getElementById('chk01').value)" value="A">A<div id="divA"></div>
+                    <input type="checkbox" id="chk02" name="chk2" onclick="myfun(document.getElementById('chk02').value)" value="B">B<div id="divB"></div>
+                    <input type="checkbox" id="chk03" name="chk2" onclick="myfun(document.getElementById('chk03').value)" value="C">C<div id="divC"></div>
+                    <input type="checkbox" id="chk04" name="chk2" onclick="myfun(document.getElementById('chk04').value)" value="D">D<div id="divD"></div>
+                    <input type="checkbox" id="chk05" name="chk2" onclick="myfun(document.getElementById('chk05').value)" value="E">E<div id="divE"></div>
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>Payble Amount</td>
+                <td><input type="text" id="txtA"></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="button" value="Add Expense" onclick="addExpense()"></td>
+            </tr>
+        </table>
+    </form>
+</div>
+<div id="out"></div>
+<script>
+
+    var arr1=["ex","involved","pp","amt"];
+    var arr2=[];
+    var IP=[];
+    var html=document.getElementById("out");
+
+
+
+
+
+
+    // Add Text box.............
+    var PPP="";
+    var z=0;
+    var chkF=[];
+    var chkT=[];
+    function myfun(t) {
+
+        PPP+=t+"|";
+
+
+        var doc=document.getElementById("div"+t);
+        var txt='<input type="txt" id="txt'+z+'">';
+        doc.innerHTML=txt;
+
+        z++;
+
+        console.log(PPP);
+    }
+
+
+    // Add Expense of Friends..........................
+    function addExpense() {
+
+        var e=document.getElementById("txtE").value;
+        var pa,pp;
+        var ip="";
+        var c=document.getElementsByName("chk1");
+        for(var k=0;k<5;k++)
+        {
+            if(c[k].checked)
+            {
+                ip+=c[k].value+"|";
+            }
+
+        }
+
+        var c2=document.getElementsByName("chk2");
+        var str="";
+        for(var k=0;k<5;k++)
+        {
+            if(c2[k].checked)
+            {
+
+                str+=c[k]+"|";
+                chkF.push(c[k].value);
+
+                var t="txt"+k;
+                var val=document.getElementById(t).value;
+                chkT.push(val);
+                alert(chkT);
+               // console.log(str,val);
+            }
+
+        }
+
+       // pp=document.getElementById("ch1").value;
+        pa=document.getElementById("txtA").value;
+
+        console.log(e);
+        console.log(ip);
+        console.log(str);
+        console.log(pa);
+
+
+
+        arr2.push(e);
+        arr2.push(ip);
+        arr2.push(pp);
+        arr2.push(pa);
+        IP=arr2[1].split("|");
+
+        console.log(arr2);
+
+
+        calc(pp,pa);
+    }
+    // Count the payable Amount....................
+    function calc(ppp,paa) {
+
+
+        var totalPerson=IP.length-1;
+        var divideAmt=paa/totalPerson;
+        var out="";
+        out+="Total person " + totalPerson+"<br><br>";
+        out+=ppp + " is Paid total "+paa+" Ruppes"+"<br><br>";
+
+
+
+
+        console.log("Total person " + totalPerson);
+        console.log(ppp + " is Paid total "+paa+" Ruppes");
+        for(var j=0;j<IP.length-1;j++)
+        {
+            if(ppp!=IP[j])
+            {
+                console.log(IP[j] + " will give total "+divideAmt+" Ruppes");
+                out+=IP[j] + " will give total "+divideAmt+" Ruppes"+"<br><br>";
+            }
+
+        }
+        html.innerHTML=out;
+        console.log(divideAmt);
+
+    }
+
+
+</script>
+</body>
+</html>

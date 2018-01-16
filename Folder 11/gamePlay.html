@@ -1,0 +1,92 @@
+<html>
+<head>
+    <style>
+        #btn{
+            background-color: red;
+            text-align: center;
+            border-radius: 10px;
+            font-size: 1em;
+            padding: 15px;
+            color: white;
+        }
+        #btn:hover{
+            background-color: crimson;
+        }
+        .gameTile{
+            display: inline-block;
+            padding: 3px;
+        }
+        .flipImage {
+            max-width: 150px;
+        }
+    </style>
+</head>
+<body>
+<div><h1>Game Play</h1></div>
+<div id="btn" class="btn">Start</div>
+<div id="score"></div>
+<div id="msg"></div>
+<div id="gameboard"></div>
+
+<script>
+
+    var palyLockout=false;
+    var gamePlay=false;
+    var tileIamges=[];
+    var tileAttay=[];
+    var tileFlippedOver=[];
+
+
+    var sb=document.getElementById("btn");
+    var msg=document.getElementById("msg");
+    var score=document.getElementById("score");
+    var gamBoard=document.getElementById("gameboard");
+
+
+    sb.addEventListener('click',startGame);
+    function  startGame() {
+        msg.innerHTML="Its Working   "+ gamePlay;
+
+        if(!gamePlay)
+        {
+            gamePlay=true;
+
+            //array of tiles
+            buildArray();
+            // suffle tiles...
+            tileAttay = tileIamges.concat(tileIamges);
+            shuffleArray(tileAttay);
+            //Build board...
+            buildBoard();
+        }
+    }
+    function buildBoard()
+    {
+        var html = "";
+        var x = 0;
+        tileAttay.forEach(function (ele) {
+            x++;
+            html += '<div class="gameTile">';
+            html += '<img id="cardz' + x + '" src="http://via.placeholder.com/250/000000/ffffff?text=click" onclick="pickCard(' + x + ',this)" class="flipImage"></div>';
+        });
+        gamBoard.innerHTML = html;
+    }
+    function buildArray() {
+        for(var x=0;x<7;x++)
+        {
+            tileIamges.push(x+'.jpg');
+        }
+    }
+    function shuffleArray(array) {
+        for(var x=array.length-1;x>0;x--)
+        {
+            var h=Math.floor(Math.random()*(x+1));
+            var item=array[x];
+            array[x]=array[h];
+            array[h]=item;
+        }
+        return array;
+    }
+</script>
+</body>
+</html>

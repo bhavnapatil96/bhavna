@@ -1,0 +1,34 @@
+<html>
+<body>
+<div id="output">Complete Javascript Course
+<br>Complete Java Course</div>
+
+Find Text   <input type="text" id="stext">
+Replace Text  <input type="text" id="rtext">
+<input type="button" value="Find" onclick="fun()">
+<script>
+
+    var out=document.getElementById("output").innerHTML;
+
+    function fun() {
+
+        var stext=document.getElementById("stext").value;
+        var rtext=document.getElementById("rtext").value;
+
+        var re=new RegExp(stext,"gi");
+
+        var res=out.match(re);
+        console.log(res);
+        if(res)
+        {
+            document.getElementById("output").innerHTML=out.replace(re,rtext);
+        }
+        else
+        {
+            alert("No Data Found...");
+        }
+    }
+
+</script>
+</body>
+</html>
